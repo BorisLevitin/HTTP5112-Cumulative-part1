@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HTTP5112_Cumulative.Models;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace HTTP5112_Cumulative.Controllers
 {
@@ -161,6 +162,34 @@ namespace HTTP5112_Cumulative.Controllers
             //Close the connection between the web server and database
             Conn.Close();
         }
+
+        [HttpPost]
+        public void UpdateTeacher(int id, [FromBody]Teacher TeacherInfo)
+        {
+            // Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+            Debug.WriteLine(TeacherInfo.TeacherFname);
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "update teachers set teacherfname=@TeacherFname,teacherlname=@TeacherLname,salary=@TeacherSalary where teacherid=@TeacherID";
+            cmd.Parameters.AddWithValue("@TeacherFname", TeacherInfo.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", TeacherInfo.TeacherLname);
+            cmd.Parameters.AddWithValue("@TeacherSalary", TeacherInfo.TeacherSalary);
+            cmd.Parameters.AddWithValue("@TeacherId", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            //Close the connection between the web server and database
+            Conn.Close();
+        }
+
     }
 
 }    

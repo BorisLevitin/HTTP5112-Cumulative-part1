@@ -22,6 +22,8 @@ nav{
 }
 .nav-link {
     float: left;
+    margin-right: 25px;
+   
 }
 .del-link{
     float:right;
