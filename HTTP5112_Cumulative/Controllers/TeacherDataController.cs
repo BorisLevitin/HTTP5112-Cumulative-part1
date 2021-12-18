@@ -106,6 +106,61 @@ namespace HTTP5112_Cumulative.Controllers
 
             return NewTeacher;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <example>POST : /api/TeacherData/DeleteTeacher/2</example>
+        /// <param name="id"></param>
+        [HttpPost]
+        public void DeleteTeacher(int id)
+        {
+            //Create an instance of a connection
+            MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "DELETE from Teachers where teacherid =@id";
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            //Close the connection between the web server and database
+            Conn.Close();
+
+        }
+        [HttpPost]
+        public void AddTeacher(Teacher NewTeacher)
+        {
+
+            // Create an instance of a connection
+             MySqlConnection Conn = School.AccessDatabase();
+
+            //Open the connection between the web server and database
+            Conn.Open();
+
+            //Establish a new command (query) for our database
+            MySqlCommand cmd = Conn.CreateCommand();
+
+            //SQL QUERY
+            cmd.CommandText = "INSERT into Teachers (teacherfname,teacherlname,salary,hiredate) values (@TeacherFname,@TeacherLname,@TeacherSalary,CURRENT_DATE())";
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@TeacherSalary", NewTeacher.TeacherSalary);
+
+            cmd.Prepare();
+
+            cmd.ExecuteNonQuery();
+
+            //Close the connection between the web server and database
+            Conn.Close();
+        }
     }
 
 }    

@@ -1,0 +1,17 @@
+﻿@model HTTP5112_Cumulative.Models.Teacher
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+
+<div id="show-container">
+
+    <h2>Are you sure you want to delete @Model.TeacherLname @Model.TeacherFname?</h2>
+    <p> This action cannot be undone.</p>
+    <nav style="width:50%; margin:0 auto;">
+        <a class="nav-link" href="/Teacher/Show/@Model.TeacherId">Cancel</a>
+        <form action="/Teacher/Delete/@Model.TeacherId" method="post">
+            <button class="delete-button" href="">Delete</button>
+        </form>
+    </nav>
+</div>

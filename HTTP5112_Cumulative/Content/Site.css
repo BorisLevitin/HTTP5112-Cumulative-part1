@@ -16,16 +16,32 @@ textarea {
     max-width: 280px;
 }
 
-.navlink{
-    text-align:right;
-    margin-top:20px;
-    float:right;
+nav{
+    overflow:hidden;
+    margin-bottom:20px;
 }
-#show-container, list-container{
-    width:75%;
-    margin:0 auto;
-    margin-top:50px;
+.nav-link {
+    float: left;
+}
+.del-link{
+    float:right;
+    color:red;
+}
+#show-container, list-container {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 .item-row{
     margin:10px 0;
+}
+.delete-button {
+    float:right;
+    display:block;
+    margin:0 auto;
+    background:red;
+    color:white;
+    border:3px solid black;
+    border-radius:5px;
+
 }
